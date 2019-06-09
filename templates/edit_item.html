@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+  <header>
+    <h2 class="font-weight-light">Edit Item</h2>
+  </header>
+  <div class="form-group">
+    <form method="post">
+      <h6> Name</h6>      
+       <input type ="text" maxlength="50" class="form-control" name="name" value="{{Edititem.name}}">  
+      <h6>Description</h6>
+       <input type ="text" class="form-control" maxlength="250" rows="3" name="description" value = "{{Edititem.description}}" ></textarea>
+      <h6>Category</h6>
+        <select name="item_category">
+          {% for category in categories %}
+            <option value="{{ category.name }}" {% if category.id == Edititem.category_id %} selected{% endif %}>{{ category.name }}</option>
+          {% endfor %}
+        </select>
+      <div class="btn-group" role="group" aria-label="Submission buttons">
+        <button type="submit" class="btn btn-default">Edit</button>
+        <a class="btn btn-secondary" href="{{ url_for('home') }}" role="button">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

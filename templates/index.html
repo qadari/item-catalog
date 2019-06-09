@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-5">
+    <header>
+      <h2 class="font-weight-light">Categories</h2>
+    </header>
+     <ul class="list-group">
+      {% for category in categories %}
+        <li class="list-group-item">
+          <a href="{{ url_for('show_category', category=category.name) | replace('%20', '%2D') }}">
+            {{ category.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-sm-7">
+   <header>
+      <h2 class="font-weight-light">Recent items</h2>
+    </header>
+    <ul class="list-group">
+      {% for item in recent_items %}
+        <li class="list-group-item">
+          <a href="{{ url_for('show_item', category=item.category.name, item=item.name) | replace('%20', '%2D') }}">
+            {{ item.name }} <em class="text-muted">({{ item.category.name }})</em>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>  
+<div class="row">
+  <div class="col-sm-5"></div>
+  <div class="col-sm-7">
+    <ul>
+      <a href="{{ url_for('catalog_json') }}"><em>Show Catalog JSON</em></a>
+    </ul>
+  </div>
+</div>
+{% endblock %}

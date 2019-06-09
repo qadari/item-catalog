@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-5">
+    <header>
+      <h2 class="font-weight-light">Categories</h2>
+    </header>
+  
+    <ul class="list-group">
+      {% for category in categories %}
+        <li class="list-group-item">
+          <a href="{{ url_for('show_category', category=category.name) | replace('%20', '%2D') }}">
+            {{ category.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-sm-7">
+    <header>
+      <h2 class="font-weight-light">{{ category_name }}</h2>
+    </header>
+  
+    <ul class="list-group">
+      {% for item in category_items %}
+        <li class="list-group-item">
+          <a href="{{ url_for('show_item', category=item.category.name, item=item.name) | replace('%20', '%2D') }}">
+            {{ item.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-5">
+    <header>
+      <h3 class="font-weight-light">Items in {{ category_name }}</h3>
+    </header>
+    <span class="text-muted"><em>{{ category_items_count }} items</em></span>
+    {% if login_status %}
+      <a class="btn btn-warning mt-1" role="button" href="{{ url_for('edit_category', category=category_name) }}">Edit</a>
+      <a class="btn btn-danger mt-1" role="button" href="{{ url_for('delete_category', category=category_name) }}">Delete</a>
+    {% endif %}
+  </div>
+  
+</div>
+<div class="row">
+  <div class="col-sm-5"></div>
+  <div class="col-sm-7">
+    <ul>
+      <a href="{{ url_for('show_category_json', category=category_name) }}"><em>Show {{ category_name }} JSON</em></a>
+    </ul>
+  </div>
+    <div>
+    </div>
+</div>
+{% endblock %}
