@@ -62,7 +62,8 @@ class Items(Base):
         }
 
 # Configure SQLAlchemy engine
-engine = create_engine('sqlite:///catalog.db')
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
+#engine = create_engine('sqlite:///catalog.db')
 
 # Create database
 Base.metadata.create_all(engine)
