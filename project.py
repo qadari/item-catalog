@@ -20,7 +20,8 @@ from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
 app = Flask(__name__)
 APPLICATION_NAME = 'Flask Catalog'
-engine = create_engine('sqlite:///catalog.db?check_same_thread=False')
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
+#engine = create_engine('sqlite:///catalog.db?check_same_thread=False')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
